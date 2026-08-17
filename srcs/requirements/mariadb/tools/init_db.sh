@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
+set -x
 
 # Only initialize on first run (check if the DB directory is empty)
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB data directory..."
-    mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null
+    mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 
     # Start MariaDB temporarily in the background JUST for setup
     mysqld_safe --datadir=/var/lib/mysql --skip-networking &
